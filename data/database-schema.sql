@@ -1,0 +1,14 @@
+-- Local prototype table outline.
+-- For the future Supabase database, use:
+--
+-- data/supabase-schema.sql
+--
+-- The Supabase schema contains:
+-- products
+-- stores
+-- product_aliases
+-- prices
+-- receipts
+-- receipt_items
+-- crowd_price_reports
+-- three-user / three-receipt automatic consensus trigger

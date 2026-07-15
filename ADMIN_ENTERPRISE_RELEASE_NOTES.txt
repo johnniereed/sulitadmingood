@@ -1,0 +1,11 @@
+SULIT ADMIN ENTERPRISE RELEASE
+
+- Desktop-first responsive admin dashboard
+- Sticky navigation and mobile drawer
+- Compact enterprise tables and forms
+- Three-dot product action menus
+- Alias review queue with 3-user / 3-receipt verification
+- Clear verification progress wording
+- Customer app and business logic preserved
+
+Supabase: run data/SULIT_3_USER_CONSENSUS_PATCH.sql if not already applied.
