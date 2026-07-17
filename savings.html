@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#2f8f57" name="theme-color"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="assets/app-icon.svg" rel="icon"/>
+<title>Savings · Sulit</title>
+<link href="css/styles.css" rel="stylesheet"/>
+<link href="css/appstore.css" rel="stylesheet"/>
+<link href="css/ios-green.css" rel="stylesheet"/>
+<link href="css/sulit-native.css" rel="stylesheet"/>
+<link href="css/phase3-approved.css" rel="stylesheet"/>
+<link href="css/polish-update.css" rel="stylesheet"/>
+<link href="css/launch-polish.css" rel="stylesheet"/>
+<link href="css/design-system-v1.css" rel="stylesheet"/>
+<link href="css/header-system.css" rel="stylesheet"/>
+<link href="css/final-consumer-polish.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app">
+<header class="phase3-header"><h1>My Savings</h1><p>See what you spent, saved, and have left this month.</p></header>
+<main class="phase3-shell">
+<div id="receiptMessage"></div>
+<section class="hidden" id="receiptWorkspace">
+  <div class="receipt-preview hidden" id="receiptPreview"></div>
+  <div class="hidden" id="ocrProgress"></div>
+  <div class="hidden" id="receiptReview"></div>
+</section>
+
+<section class="phase3-card phase3-upload hidden" id="receiptFirstState">
+  <img src="assets/no-hassle.png" alt="Scan a grocery receipt"/>
+  <h2>Scan your first receipt</h2>
+  <p>Upload a grocery receipt to start tracking your spending and savings.</p>
+  <input accept="image/*" capture="environment" class="file-input-hidden" id="receiptCameraInput" type="file"/>
+  <input accept="image/*" class="file-input-hidden" id="receiptGalleryInput" type="file"/>
+  <div class="phase3-actions">
+    <button onclick="openReceiptCamera()" type="button">Take photo</button>
+    <button class="secondary" onclick="openReceiptGallery()" type="button">Choose from gallery</button>
+  </div>
+</section>
+
+<section class="phase3-card phase3-setup hidden" id="budgetSetupCard">
+  <img src="assets/savings.png" alt="Set up your grocery budget"/>
+  <span class="badge">Receipt saved</span>
+  <h2>Set up your monthly budget</h2>
+  <p>Add your name and grocery budget to unlock the full savings dashboard.</p>
+  <label>Your name</label>
+  <input id="profileName" placeholder="John" type="text"/>
+  <label>Monthly grocery budget</label>
+  <input id="monthlyBudget" min="0" placeholder="600" step="0.01" type="number"/>
+  <button onclick="saveBudgetProfile()" type="button">View my savings</button>
+</section>
+
+<section class="hidden" id="budgetDashboard">
+  <div class="phase3-section-head">
+    <div><h2 id="budgetOwnerTitle">My Savings</h2><p>Updated from your saved receipts</p></div>
+    <button class="secondary" onclick="openBudgetEditor()" style="width:auto" type="button">Edit budget</button>
+  </div>
+
+  <section class="phase3-hero">
+    <small>Saved this month</small>
+    <strong id="monthlySavingsValue">$0.00</strong>
+    <span>Compared with regular store prices</span>
+  </section>
+
+  <div class="phase3-section-head"><div><h2>Monthly budget</h2><p>Your current spending progress</p></div></div>
+  <section class="phase3-card phase3-budget">
+    <div class="budget-ring" id="budgetRing"><div style="text-align:center"><b id="budgetProgressText">0%</b><br/><span class="muted" style="font-size:9px">used</span></div></div>
+    <div class="phase3-stat-list">
+      <div class="phase3-stat"><span>Budget</span><b id="monthlyBudgetValue">$0.00</b></div>
+      <div class="phase3-stat"><span>Spent</span><b id="spentThisMonthValue">$0.00</b></div>
+      <div class="phase3-stat"><span>Remaining</span><b id="remainingBudgetValue">$0.00</b></div>
+    </div>
+    <div class="budget-progress-track hidden"><div class="budget-progress-bar" id="budgetProgressBar"></div></div>
+  </section>
+
+  <div class="phase3-section-head"><div><h2>Add another receipt</h2><p>Keep your totals current after every trip</p></div></div>
+  <section class="phase3-card phase3-upload">
+    <img src="assets/no-hassle.png" alt="Upload receipt"/>
+    <div class="phase3-actions">
+      <button onclick="openReceiptCamera()" type="button">Take photo</button>
+      <button class="secondary" onclick="openReceiptGallery()" type="button">Choose from gallery</button>
+    </div>
+  </section>
+
+  <section class="receipt-history-clean">
+    <div class="phase3-section-head">
+      <div><h2>Receipt history</h2><p>Your recent grocery trips</p></div>
+      <a class="phase3-link" href="receipts.html">View all</a>
+      <span class="hidden" id="receiptCountBadge">0 receipts</span>
+    </div>
+    <div id="receiptHistory"></div>
+  </section>
+</section>
+
+<div class="shopping-modal" id="budgetEditModal">
+  <div class="shopping-modal-card">
+    <h2>Edit monthly budget</h2>
+    <label>Monthly grocery budget</label>
+    <input id="editMonthlyBudget" min="0" step="0.01" type="number"/>
+    <div class="shopping-modal-buttons">
+      <button class="secondary" onclick="closeBudgetEditor()" type="button">Cancel</button>
+      <button onclick="saveEditedBudget()" type="button">Save budget</button>
+    </div>
+  </div>
+</div>
+</main>
+<nav class="nav"><a href="add.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path class="icon-soft" d="M3.5 10.5 12 3.5l8.5 7v9a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5z"></path><path d="M8.5 21v-7h7v7"></path><path d="m3.5 10.5 8.5-7 8.5 7"></path></svg></span>Home</a><a href="list.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><rect class="icon-soft" height="17" rx="3" width="16" x="4" y="3.5"></rect><path d="M8 8h8M8 12h8M8 16h5"></path><circle cx="6.5" cy="8" r=".6"></circle><circle cx="6.5" cy="12" r=".6"></circle><circle cx="6.5" cy="16" r=".6"></circle></svg></span>List</a><a href="stores.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path class="icon-soft" d="M4 9h16v10.5A1.5 1.5 0 0 1 18.5 21h-13A1.5 1.5 0 0 1 4 19.5z"></path><path d="M3 9h18l-1.7-5H4.7z"></path><path d="M8 21v-6h8v6M7 9v2.2a2 2 0 0 0 4 0V9M11 9v2.2a2 2 0 0 0 4 0V9M15 9v2.2a2 2 0 0 0 4 0V9"></path></svg></span>Plan</a><a class="active" href="savings.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><circle class="icon-soft" cx="12" cy="12" r="9"></circle><path d="M14.8 8.5c-.7-.7-1.6-1-2.8-1-1.8 0-3.1.9-3.1 2.3 0 1.5 1.4 2 3.2 2.4 1.7.4 3.1.9 3.1 2.5 0 1.5-1.4 2.6-3.4 2.6-1.3 0-2.5-.4-3.3-1.3M12 5.8v12.4"></path></svg></span>Savings</a><a href="profile.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><circle class="icon-soft" cx="12" cy="8" r="4"></circle><path class="icon-soft" d="M4.5 21c.7-4.4 3.2-6.7 7.5-6.7s6.8 2.3 7.5 6.7z"></path><circle cx="12" cy="8" r="4"></circle><path d="M4.5 21c.7-4.4 3.2-6.7 7.5-6.7s6.8 2.3 7.5 6.7"></path></svg></span>Account</a></nav>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="js/data.js"></script><script src="js/app-config.js"></script><script src="js/cloud-sync.js"></script><script src="js/database-service.js"></script><script src="js/receipt-matcher.js"></script><script src="js/savings.js"></script>
+<script>(function(){function syncRing(){const t=document.getElementById('budgetProgressText'),r=document.getElementById('budgetRing');if(!t||!r)return;const n=Math.max(0,Math.min(100,parseFloat(t.textContent)||0));r.style.setProperty('--budget-angle',n+'%')}const obs=new MutationObserver(syncRing);const target=document.getElementById('budgetProgressText');if(target)obs.observe(target,{childList:true,subtree:true,characterData:true});document.addEventListener('grocerysaver:receipts-updated',syncRing);setTimeout(syncRing,300)})();</script>
+
+<script>if('serviceWorker' in navigator&&!['localhost','127.0.0.1'].includes(location.hostname)){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}</script>
+<script src="js/header-system.js"></script>
+</body></html>

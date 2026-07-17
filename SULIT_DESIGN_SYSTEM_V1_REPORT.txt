@@ -1,0 +1,24 @@
+Sulit v1.0 Design System
+
+Updated customer-facing presentation only.
+
+Standardized:
+- Primary, secondary, and destructive buttons
+- Standard, recommendation, and summary cards
+- One outline icon style
+- Typography hierarchy
+- 8/12/16/24/32 spacing scale
+- Role-based colors
+- Bottom sheets and selected states
+
+Visible fixes:
+- Search result name/size separation
+- Calm Change Brand selection cards
+- Removed My List floating menu
+- Decision-first Best Prices Today screen
+- Neutral store icons
+- Proportionate Account layout
+- White Profile rows and red-outline Log Out
+
+Not changed:
+Supabase, OCR, receipt logic, route calculations, prices, products, Admin business logic.

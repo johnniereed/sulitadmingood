@@ -1,0 +1,26 @@
+SULIT TARGETED POLISH UPDATE
+
+Changed only the requested scope:
+- Preserved minimalist Home icons.
+- Preserved product PNG icons in Search.
+- Changed Option 2 “Choose this option” text to white.
+- Rebuilt Store Details as a stronger Shopping Summary.
+- Strengthened Start Shopping presentation and removed weak message-box styling.
+- Replaced the straight OpenStreetMap line with an OSRM road-route preview and safe fallback.
+- Admin New Receipt Names and Receipt Data refresh actions now clear stale rendered state before fetching fresh data. They do not delete database records.
+- Added a subtle layered light background to customer screens.
+
+Not changed:
+- Supabase schema
+- OCR logic
+- Receipt persistence
+- Search logic
+- Home/Search icon behavior
+- Shopping Plan calculations
+- Google Maps handoff logic
+- Admin data deletion behavior
+
+Live verification required:
+- OpenStreetMap/OSRM route accuracy with device GPS and actual branch coordinates
+- Admin refresh against live Supabase
+- Small-device visual review

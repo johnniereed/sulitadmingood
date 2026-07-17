@@ -1,0 +1,12 @@
+SULIT V2 RECEIPT + ADMIN SETUP
+
+1. Deploy the entire ZIP.
+2. Open data/SULIT_V2_RECEIPT_ADMIN_PATCH.sql.
+3. Paste it into Supabase SQL Editor and press Run.
+4. In Supabase Authentication, enable Anonymous Sign-Ins.
+5. Make sure the admin account profile has is_admin = true.
+6. Customer: upload receipt -> review digital items -> choose/correct store -> Save Receipt.
+7. Admin: Receipt data -> Refresh cloud data.
+8. New receipt names: store is editable before approving the alias.
+
+Important: OCR is browser-based and can misread store headers. The customer can correct the store before saving, and the admin can correct it afterward.

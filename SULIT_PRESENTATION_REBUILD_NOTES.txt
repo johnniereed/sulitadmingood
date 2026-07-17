@@ -1,0 +1,20 @@
+SULIT PRESENTATION REBUILD
+
+This release preserves the existing HTML workflow and JavaScript/Supabase business logic.
+
+Presentation changes:
+- One soft-green, white and very-light-grey design system across customer and admin pages.
+- Native iOS-style typography stack and visual hierarchy.
+- Consistent 16px cards, 13px controls, subtle borders and soft shadows.
+- Neutral category cards with custom green line icons instead of bright emoji tiles.
+- Soft green promotional and savings surfaces instead of saturated red/orange blocks.
+- Consistent store, route, receipt, savings, profile and admin styling.
+- Simplified active navigation treatment.
+- Responsive mobile spacing retained.
+
+Verification completed in this environment:
+- All JavaScript files pass syntax checking.
+- All HTML pages parse successfully.
+- Local CSS, JS and image references resolve.
+
+Live Supabase writes, OCR quality, camera/gallery permissions and Google Maps navigation require testing in the deployed app with the connected Supabase project and a real device/browser session.

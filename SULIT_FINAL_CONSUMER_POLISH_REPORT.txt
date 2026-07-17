@@ -1,0 +1,16 @@
+Sulit v1.0 Final Consumer Polish
+
+Changed only customer-facing presentation and wording:
+- Blended headers with no decorative header icons
+- Kept approved search result layout; fixed product/size spacing
+- Calm white Change Brand choices with soft selected state
+- Removed empty Account hero card
+- Recommendation-first Best Prices screen
+- Standardized information/success messages
+- Removed GrocerySaver User default from name onboarding
+
+Not changed:
+- Supabase schema or data
+- OCR and receipt processing
+- Route and price calculations
+- Admin business logic

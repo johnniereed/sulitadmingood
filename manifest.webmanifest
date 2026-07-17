@@ -1,0 +1,12 @@
+{
+  "name":"Sulit — Grocery Savings",
+  "short_name":"Sulit",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#ffffff",
+  "theme_color":"#2f8f57",
+  "description":"Compare grocery prices, plan routes and track receipt savings.",
+  "icons":[
+    {"src":"assets/app-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

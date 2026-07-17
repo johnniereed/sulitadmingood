@@ -1,0 +1,21 @@
+SULIT LAUNCH CANDIDATE
+
+Implemented in this release:
+- Product not found -> one-tap Add to Sulit request
+- Local Demand Queue plus optional Supabase product_requests table
+- Requested-product in-app notifications after Admin fulfillment
+- Price freshness labels and Admin Today's Tasks
+- Weekly grocery list save/reuse
+- Estimated Alberta GST based on product tax classification
+- Complete Shopping Plan recommendation cases retained and tax-aware
+- In-app route map preview with Google Maps handoff retained
+- Admin Demand Queue and freshness task screens
+
+Live verification still required:
+- Run data/SULIT_LAUNCH_FEATURES_PATCH.sql in Supabase
+- Authenticated cloud product request insert/read
+- Camera and OCR on a current receipt
+- Supabase receipt and receipt_items writes
+- GPS permission and route preview tiles
+- Google Maps handoff on iPhone/Android
+- In-app notification fulfillment across separate devices (local works immediately; cross-device requires future notification sync)

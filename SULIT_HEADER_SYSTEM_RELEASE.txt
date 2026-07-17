@@ -1,0 +1,5 @@
+Sulit Header System Release
+
+Changed only customer-facing headers, Account profile hero removal, Home category action layout, and small store wording polish.
+Locked search-result design was not changed.
+No Supabase, OCR, receipt, pricing, route calculation, database, or admin logic changes.

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1f7a3f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/app-icon.svg">
+  <title>Sulit</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/appstore.css">
+  <link rel="stylesheet" href="css/ios-green.css">
+  <link rel="stylesheet" href="css/sulit-native.css">
+  <link rel="stylesheet" href="css/phase1-approved.css">
+<link href="css/polish-update.css" rel="stylesheet"/>
+<link href="css/launch-polish.css" rel="stylesheet"/>
+<link href="css/design-system-v1.css" rel="stylesheet"/>
+<link href="css/final-consumer-polish.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app onboarding-app phase1-onboarding">
+  <main class="onboarding-shell">
+    <section class="onboarding-slide active" data-step="1">
+      <button class="skip-link" onclick="finishOnboarding()">Skip</button>
+      <div class="onboarding-brand">Sulit<span>🍁</span></div>
+      <div class="onboarding-copy compact-copy">
+        <h1>Smarter shopping.<br>Real savings.</h1>
+      </div>
+      <div class="onboarding-art onboarding-art-large"><img src="assets/hero-grocery.png" alt="Grocery basket"></div>
+      <button class="onboarding-primary" onclick="beginGetStarted()">Get Started</button>
+    </section>
+
+    <section class="onboarding-slide" data-step="2">
+      <button class="skip-link" onclick="finishOnboarding()">Skip</button>
+      <div class="onboarding-copy"><h1>How Sulit works</h1></div>
+      <div class="how-list">
+        <div><img src="assets/compare.png" alt=""><span><strong>Add your list</strong><small>Tell us what you need.</small></span></div>
+        <div><img src="assets/routes.png" alt=""><span><strong>Compare stores</strong><small>We compare prices at nearby stores.</small></span></div>
+        <div><img src="assets/savings.png" alt=""><span><strong>Get the best plan</strong><small>We find the plan that saves you the most.</small></span></div>
+        <div><img src="assets/hero-grocery.png" alt=""><span><strong>Save money &amp; time</strong><small>Follow the route and start saving.</small></span></div>
+      </div>
+      <button class="onboarding-primary" onclick="nextSlide()">Next</button>
+    </section>
+
+    <section class="onboarding-slide" data-step="3">
+      <button class="skip-link" onclick="finishOnboarding()">Skip</button>
+      <div class="onboarding-art"><img src="assets/routes.png" alt="Location map"></div>
+      <div class="onboarding-copy"><h1>Allow location access</h1><p>We use your location to find nearby stores and give you accurate routes.</p></div>
+      <button class="onboarding-primary" onclick="requestLocation()">Allow Location</button>
+      <button class="onboarding-text-action" onclick="nextSlide()">Not now</button>
+    </section>
+
+    <section class="onboarding-slide" data-step="4">
+      <button class="skip-link" onclick="finishOnboarding()">Skip</button>
+      <div class="onboarding-art"><img src="assets/savings.png" alt="Notification bell"></div>
+      <div class="onboarding-copy"><h1>Notifications</h1><p>Get notified about price drops, deals and your savings.</p></div>
+      <button class="onboarding-primary" onclick="requestNotifications()">Enable</button>
+      <button class="onboarding-text-action" onclick="nextSlide()">Not now</button>
+    </section>
+
+    <section class="onboarding-slide" data-step="5">
+      <div class="onboarding-art"><img src="assets/no-hassle.png" alt="Celebration"></div>
+      <div class="onboarding-copy"><h1>You’re all set!</h1><p>Let’s start finding you the smartest shopping plan today.</p></div>
+      <button class="onboarding-primary" onclick="completeOnboarding()">Start Shopping</button>
+    </section>
+    <div id="onboardingDots" class="onboarding-dots"></div>
+  </main>
+</div>
+<script>
+let slide=0;
+const slides=[...document.querySelectorAll('.onboarding-slide')];
+function paint(){
+  slides.forEach((s,i)=>s.classList.toggle('active',i===slide));
+  document.getElementById('onboardingDots').innerHTML=slides.map((_,i)=>`<i class="${i===slide?'active':''}"></i>`).join('');
+}
+function nextSlide(){slide=Math.min(slide+1,slides.length-1);paint()}
+function requestLocation(){
+  if(!navigator.geolocation){nextSlide();return;}
+  navigator.geolocation.getCurrentPosition(()=>nextSlide(),()=>nextSlide(),{enableHighAccuracy:false,timeout:5000});
+}
+async function requestNotifications(){
+  try{if('Notification' in window && Notification.permission==='default') await Notification.requestPermission();}catch(_){ }
+  nextSlide();
+}
+function finishOnboarding(){localStorage.setItem('sulitOnboardingComplete','true');location.href='add.html'}
+function beginGetStarted(){SulitAccount.openName(()=>{slide=Math.min(slide+1,slides.length-1);paint()})}
+function completeOnboarding(){const saved=(localStorage.getItem('groceryProfileName')||'').trim();if(saved){finishOnboarding();return;}SulitAccount.openName(finishOnboarding)}
+if(localStorage.getItem('sulitOnboardingComplete')==='true')location.replace('add.html');
+paint();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/app-config.js"></script><script src="js/cloud-sync.js"></script><script src="js/account-flow.js"></script>
+<script>if('serviceWorker' in navigator && !['localhost','127.0.0.1'].includes(location.hostname)){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}</script>
+</body>
+</html>

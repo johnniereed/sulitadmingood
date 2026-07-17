@@ -1,0 +1,22 @@
+SULIT V3.0 PRODUCTION BUILD
+
+Visual system
+- One green/white palette across customer and admin screens.
+- Shared spacing, typography, buttons, square cards, fields and navigation.
+- Store comparison cards use separated square rows and one Cheapest badge.
+- Receipt history and trip summary use compact square rows.
+
+Workflow kept
+- Onboarding, Home, Grocery List, Stores, Routes, Google Maps, Receipts,
+  Savings, Profile and Admin remain connected to the existing logic.
+
+Stability changes
+- Route 1 is the cheapest complete plan (one or two stores).
+- Route 2 is the complete one-store convenience option when Route 1 uses two stores.
+- Receipt local retries replace existing receipt items/reports instead of duplicating them.
+- Supabase field mapping remains profiles.id -> receipts.user_id and
+  receipts.id -> receipt_items.receipt_id.
+- Service-worker cache version bumped so the new UI is not replaced by stale files.
+
+Required Supabase setup
+Run data/SULIT_STABILIZATION_PATCH.sql if it has not already been run.

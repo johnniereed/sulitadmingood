@@ -1,0 +1,27 @@
+SULIT — NATIVE iOS PRESENTATION RELEASE
+
+This build preserves the existing Supabase, OCR, receipt, route, savings, authentication and admin data logic.
+
+Presentation and UX changes:
+- Unified soft-green iOS-style visual system across customer screens.
+- Consistent typography, spacing, cards, buttons, badges, shadows and navigation.
+- Change Brand now opens as a native-style bottom sheet rather than expanding a bright block inside the list.
+- Brand choices display brand, store, size and price with a quiet radio selection state.
+- Best Shopping Plan now gives a human recommendation based on savings and added time:
+  under $5: prefer one store;
+  $5–$10: weigh the extra time;
+  above $10: recommend the two-store savings plan when available.
+- Store cards, quantity controls, route cards and modal surfaces were refined for small phones.
+- Onboarding Skip remains neutral grey and fixed.
+- Service worker is disabled on localhost/127.0.0.1 to prevent stale Live Server previews, but remains available after production deployment.
+
+Verification performed:
+- JavaScript syntax checks.
+- HTML parse and local asset reference checks.
+- ZIP integrity check.
+
+Still requires device/live-project testing:
+- Camera and receipt OCR.
+- Supabase authentication, inserts and RLS policies.
+- Google Maps deep links.
+- Actual store data and route outcomes.

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#2f8f57" name="theme-color"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="default" name="apple-mobile-web-app-status-bar-style"/><link href="manifest.webmanifest" rel="manifest"/><link href="assets/app-icon.svg" rel="icon"/><title>Profile · Sulit</title><link href="css/styles.css" rel="stylesheet"/><link href="css/appstore.css" rel="stylesheet"/><link href="css/ios-green.css" rel="stylesheet"/><link href="css/sulit-native.css" rel="stylesheet"/><link href="css/phase3-approved.css" rel="stylesheet"/><link href="css/launch-ready.css" rel="stylesheet"/>
+<link href="css/polish-update.css" rel="stylesheet"/>
+<link href="css/launch-polish.css" rel="stylesheet"/>
+<link href="css/profile-polish.css" rel="stylesheet"/>
+<link href="css/design-system-v1.css" rel="stylesheet"/>
+<link href="css/header-system.css" rel="stylesheet"/>
+<link href="css/final-consumer-polish.css" rel="stylesheet"/>
+</head>
+<body class="account-page"><div class="app"><header class="phase3-header"><h1>Account</h1><p>Your shopping, savings, and preferences.</p></header><main class="phase3-shell">
+<p class="account-section-label">Your shopping</p>
+<section class="account-settings">
+  <a class="account-row" href="savings.html" style="text-decoration:none">
+    <span class="account-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M7 9h5M7 13h3M16 10v4"></path></svg></span>
+    <span class="account-row-copy"><b>This month’s budget</b><small>Review spending and remaining budget</small></span><span class="account-row-action">›</span>
+  </a>
+  <a class="account-row" href="receipts.html" style="text-decoration:none">
+    <span class="account-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-2-1.4L14 21l-2-1.4L10 21l-2-1.4L6 21z"></path><path d="M9 8h6M9 12h6M9 16h4"></path></svg></span>
+    <span class="account-row-copy"><b>Shopping history</b><small>Open your saved digital receipts</small></span><span class="account-row-action">›</span>
+  </a>
+</section>
+<p class="account-section-label">Preferences</p>
+<section class="account-settings">
+  <button class="account-row" type="button" onclick="toggleNotifications()">
+    <span class="account-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 8h18c0-1-3-1-3-8"></path><path d="M10 21h4"></path></svg></span>
+    <span class="account-row-copy"><b>Notifications</b><small>Price and shopping reminders</small></span><span class="account-status" id="notificationStatus">Off</span>
+  </button>
+  <button class="account-row" type="button" onclick="document.getElementById('aboutSulit').classList.toggle('hidden')">
+    <span class="account-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg></span>
+    <span class="account-row-copy"><b>About Sulit</b><small>How your shopping plan works</small></span><span class="account-row-action">›</span>
+  </button>
+</section>
+<section class="account-about hidden" id="aboutSulit"><h2>Plan. Shop. Save.</h2><p>Sulit uses your grocery list, estimated prices, and travel time to recommend a practical shopping plan. After shopping, your receipts help track real spending and savings.</p></section>
+<button class="account-logout" onclick="logoutSulit()">Log Out</button>
+</main><nav class="nav"><a href="add.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path class="icon-soft" d="M3.5 10.5 12 3.5l8.5 7v9a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5z"></path><path d="M8.5 21v-7h7v7"></path><path d="m3.5 10.5 8.5-7 8.5 7"></path></svg></span>Home</a><a href="list.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><rect class="icon-soft" height="17" rx="3" width="16" x="4" y="3.5"></rect><path d="M8 8h8M8 12h8M8 16h5"></path><circle cx="6.5" cy="8" r=".6"></circle><circle cx="6.5" cy="12" r=".6"></circle><circle cx="6.5" cy="16" r=".6"></circle></svg></span>List</a><a href="stores.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path class="icon-soft" d="M4 9h16v10.5A1.5 1.5 0 0 1 18.5 21h-13A1.5 1.5 0 0 1 4 19.5z"></path><path d="M3 9h18l-1.7-5H4.7z"></path><path d="M8 21v-6h8v6M7 9v2.2a2 2 0 0 0 4 0V9M11 9v2.2a2 2 0 0 0 4 0V9M15 9v2.2a2 2 0 0 0 4 0V9"></path></svg></span>Plan</a><a href="savings.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><circle class="icon-soft" cx="12" cy="12" r="9"></circle><path d="M14.8 8.5c-.7-.7-1.6-1-2.8-1-1.8 0-3.1.9-3.1 2.3 0 1.5 1.4 2 3.2 2.4 1.7.4 3.1.9 3.1 2.5 0 1.5-1.4 2.6-3.4 2.6-1.3 0-2.5-.4-3.3-1.3M12 5.8v12.4"></path></svg></span>Savings</a><a class="active" href="profile.html"><span class="nav-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><circle class="icon-soft" cx="12" cy="8" r="4"></circle><path class="icon-soft" d="M4.5 21c.7-4.4 3.2-6.7 7.5-6.7s6.8 2.3 7.5 6.7z"></path><circle cx="12" cy="8" r="4"></circle><path d="M4.5 21c.7-4.4 3.2-6.7 7.5-6.7s6.8 2.3 7.5 6.7"></path></svg></span>Account</a></nav></div>
+<script>const key='sulitNotificationsEnabled';function draw(){const el=document.getElementById('notificationStatus');const on=localStorage.getItem(key)==='true';el.textContent=on?'On':'Off';el.classList.toggle('is-on',on)}function toggleNotifications(){const on=localStorage.getItem(key)==='true';localStorage.setItem(key,String(!on));draw();if(!on&&'Notification'in window&&Notification.permission==='default')Notification.requestPermission()}function logoutSulit(){localStorage.removeItem('sulitOnboardingComplete');location.href='index.html'}draw();</script><script>
+function renderLaunchNotifications(){const host=document.getElementById('notificationList');const notes=SulitLaunch.getNotifications();host.innerHTML=notes.length?notes.map(n=>`<div class="notification-row"><strong>${n.title}</strong><small>${n.message}</small></div>`).join(''):'<div class="empty muted">No product updates yet.</div>'}
+function markAllNotificationsRead(){SulitLaunch.markNotificationsRead();renderLaunchNotifications()}
+renderLaunchNotifications();SulitLaunch.syncNotifications().then(renderLaunchNotifications);
+</script>
+<script>if('serviceWorker'  in navigator&&!['localhost','127.0.0.1'].includes(location.hostname)){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}</script><script src="js/header-system.js"></script>
+</body></html>

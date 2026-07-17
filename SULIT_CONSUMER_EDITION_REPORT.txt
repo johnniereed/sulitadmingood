@@ -1,0 +1,34 @@
+SULIT v1.0 CONSUMER EDITION
+
+CUSTOMER-FACING CHANGES
+- Added a unified consumer design system across onboarding, Home, Search, List, Best Prices, Shopping Plan, Route, Receipts, Savings, and Account.
+- Redesigned brand selection as calm white cards with a green outline/check for the selected brand.
+- Removed the unused floating three-dot control from My List.
+- Reworked Best Prices Today into a decision-first recommendation with store ranking and clear complete/missing coverage.
+- Strengthened Shopping Plan and Your Trip Is Ready with a clear recommendation-first hierarchy.
+- Simplified Account cards and removed heavy green card backgrounds.
+- Expanded the category catalog presentation with Drinks, Snacks, Canned, Paper, Baby, and Pet categories.
+- Updated customer wording and navigation labels to be more direct and consumer-friendly.
+
+NOT CHANGED
+- Supabase configuration or schema
+- OCR or receipt extraction
+- Receipt saving and matching logic
+- Admin business logic
+- Product or price records
+- Store total calculations
+- Shopping Plan recommendation calculations
+- Route selection calculations
+
+STATIC CHECKS
+- JavaScript syntax
+- HTML parsing
+- Local asset references
+- ZIP integrity
+
+LIVE TESTING STILL REQUIRED
+- Supabase reads/writes
+- Camera and OCR
+- GPS and OpenStreetMap route preview
+- Google Maps handoff
+- Final iPhone and Android visual review

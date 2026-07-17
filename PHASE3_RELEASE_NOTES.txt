@@ -1,0 +1,28 @@
+SULIT PHASE 3 — APPROVED UI
+
+Changed only:
+- savings.html
+- receipts.html
+- profile.html
+- js/savings.js (customer-facing receipt wording and review presentation only)
+- css/phase3-approved.css
+- sw.js cache version
+
+Phase 3 includes:
+- Receipt upload and OCR progress presentation
+- Digital receipt review
+- Receipt save success messaging
+- Savings and monthly budget dashboard
+- Receipt history and digital receipt viewer
+- Profile / My Account presentation
+
+Not changed:
+- Phase 1 onboarding, Home, Search, size selection, Change Brand, Grocery List
+- Phase 2 stores, Shopping Plan, Route 1/Route 2, Google Maps handoff, return popup
+- Admin
+- Supabase schema or credentials
+- OCR extraction logic
+- Route calculations
+- Alias or price verification logic
+
+Live testing still required for camera/gallery permissions, OCR quality, Supabase writes, and cloud receipt sync.

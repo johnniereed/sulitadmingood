@@ -1,0 +1,13 @@
+SULIT STABILIZATION RELEASE
+
+1. Run data/SULIT_STABILIZATION_PATCH.sql in Supabase SQL Editor.
+2. Deploy every file in this folder together.
+3. Test with a fresh current receipt.
+4. After saving, verify Savings, Receipts, Supabase receipts/receipt_items, and Admin Receipt Data.
+
+Key schema mappings used:
+profiles.id = receipts.user_id
+receipts.id = receipt_items.receipt_id
+receipt_items.unit_price
+receipt_items.matched_product_id
+receipt_items.matched_name

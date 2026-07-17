@@ -1,0 +1,15 @@
+SULIT V2.0 — MODERN LAUNCH BUILD
+
+What changed
+- Complete 2026 visual redesign across onboarding, Home, List, Stores, Routes, Savings, Receipts, Profile and Admin.
+- New Sulit logo and original SVG onboarding/hero artwork.
+- Canadian red, warm orange, soft green and light-grey design system.
+- Existing element IDs, scripts, Supabase configuration and workflow logic preserved.
+- Home now includes a modern hero and category strip while retaining the working search/add controls.
+- Savings styled as a modern fintech dashboard.
+- Admin styled as a clean responsive desktop dashboard.
+
+Important
+- Run data/supabase-schema.sql only when setting up a new Supabase database.
+- For an existing database, run data/SULIT_V2_RECEIPT_ADMIN_PATCH.sql by copying the SQL CONTENT into Supabase SQL Editor—not the file path.
+- Real receipt extraction still depends on browser OCR quality and Supabase permissions/configuration.

@@ -1,0 +1,6 @@
+ADMIN UPDATE
+
+1. Product table actions now use one three-dot menu.
+2. Crowd verification requires 3 distinct users AND 3 distinct receipts for the same product, store, and exact price.
+3. Run data/SULIT_3_USER_CONSENSUS_PATCH.sql in Supabase SQL Editor to update the live database function.
+4. Verification wording now displays progress as 0–3 users and 0–3 receipts.

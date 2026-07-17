@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2f8f57"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/app-icon.svg">
+<title>Sulit Admin</title><link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/appstore.css"><link rel="stylesheet" href="css/ios-green.css"><link rel="stylesheet" href="css/admin-responsive.css"><link rel="stylesheet" href="css/admin-enterprise.css"><link href="css/launch-ready.css" rel="stylesheet"/>
+<link href="css/polish-update.css" rel="stylesheet"/>
+</head>
+<body class="admin-shell"><div class="app">
+<div class="admin-topbar">
+  <div class="admin-brand"><div class="admin-brand-mark">S</div><div><strong>Sulit Admin</strong><span>Database management</span></div></div>
+  <div class="admin-topbar-actions"><button id="adminMenuButton" class="admin-menu-button" type="button" aria-label="Open admin navigation" aria-expanded="false">☰</button><span class="admin-live-dot"></span><span>Connected</span></div>
+</div>
+
+<main>
+
+
+<div class="card" id="adminCloudLoginCard">
+  <div class="row space">
+    <div>
+      <div class="login-icon">S</div><h2>Sign in to Sulit Admin</h2>
+      <div id="adminCloudStatus" class="muted">
+        Manage products, prices, receipts and users from one place.
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div>
+      <label>Email</label>
+      <input id="adminCloudEmail" type="email" autocomplete="username">
+    </div>
+
+    <div>
+      <label>Password</label>
+      <input id="adminCloudPassword" type="password" autocomplete="current-password">
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:14px">
+    <button onclick="loginCloudAdmin()">Sign in</button>
+    
+    
+  </div>
+</div>
+<div id="adminDashboardShell" class="hidden"><div id="adminDrawerBackdrop" class="admin-drawer-backdrop" aria-hidden="true"></div>
+  <div class="admin-toolbar">
+    <div><h1>Dashboard</h1><p id="adminSignedInText">Signed in</p></div>
+    <button class="admin-signout" type="button" onclick="logoutCloudAdmin()">Sign out</button>
+  </div>
+
+  
+
+
+<div id="adminMessage"></div>
+<div class="admin-overview-head"><div><h2>Overview</h2><p>Live totals from your Sulit database.</p></div></div>
+<div class="grid2 admin-stats-grid">
+ <div class="stat"><div class="muted">Products</div><div id="productCount" class="value">0</div></div>
+ <div class="stat"><div class="muted">Store prices</div><div id="allPriceCount" class="value">0</div></div>
+ <div class="stat"><div class="muted">Alias groups</div><div id="aliasGroupCount" class="value">0</div></div>
+ <div class="stat"><div class="muted">Crowd verified</div><div id="verifiedPriceCount" class="value">0</div></div>
+</div>
+<br>
+<div class="admin-workspace"><aside class="admin-sidebar"><div class="admin-nav-label">MANAGE</div><div class="admin-tabs">
+ <button class="admin-tab" data-tab="tasks" onclick="openAdminTab('tasks');renderLaunchAdmin()">Today’s Tasks</button>
+ <button class="admin-tab" data-tab="demand" onclick="openAdminTab('demand');renderLaunchAdmin()">Demand Queue</button>
+ <button class="admin-tab active" data-tab="products" onclick="openAdminTab('products')">📦 Products</button>
+ <button class="admin-tab" data-tab="prices" onclick="openAdminTab('prices')">💲 Prices</button>
+ <button class="admin-tab" data-tab="aliases" onclick="openAdminTab('aliases')">🏷️ Aliases</button>
+ <button class="admin-tab" data-tab="alias-review" onclick="openAdminTab('alias-review');refreshAliasCandidates()">🔎 New receipt names</button>
+ <button class="admin-tab" data-tab="receipts" onclick="openAdminTab('receipts')">🧾 Receipt data</button>
+ <button class="admin-tab" data-tab="users" onclick="openAdminTab('users')">👥 Users</button>
+</div></aside><div class="admin-content">
+
+
+<section id="panel-tasks" class="admin-panel"><div class="admin-section-hero"><div><span class="eyebrow">PRICE FRESHNESS</span><h2>Today’s Tasks</h2><p>Products are prioritized by how long their prices have gone without verification.</p></div><button class="secondary compact-button" onclick="renderLaunchAdmin()">Refresh</button></div><div id="launchTaskStats" class="admin-launch-grid"></div><div class="card"><div class="admin-section-title"><h2>Prices needing attention</h2><span class="admin-count" id="launchTaskCount">0 due</span></div><div id="launchTaskRows"></div></div></section>
+<section id="panel-demand" class="admin-panel"><div class="admin-section-hero"><div><span class="eyebrow">CATALOG DEMAND</span><h2>Demand Queue</h2><p>Add only the products shoppers are actively looking for. Fulfilled requests create an in-app notification.</p></div><button class="secondary compact-button" onclick="renderLaunchAdmin()">Refresh</button></div><div id="launchDemandStats" class="admin-launch-grid"></div><div class="card"><div class="admin-section-title"><h2>Requested products</h2><span class="admin-count" id="launchDemandCount">0 pending</span></div><div id="launchDemandRows"></div></div></section>
+<section id="panel-products" class="admin-panel active">
+ <div class="card">
+  <div class="admin-section-title"><div><h2 id="productFormTitle">Add Product</h2><div class="muted">Create a product once. It becomes searchable in Home immediately.</div></div><span class="admin-count" id="productTableCount">0 products</span></div>
+  <input id="productEditId" type="hidden">
+  <div class="admin-form-grid">
+   <div><label>Product name</label><input id="adminProductName" placeholder="Example: Vaseline Petroleum Jelly"></div>
+   <div><label>Brand</label><input id="adminProductBrand" placeholder="Example: Vaseline"></div>
+   <div><label>Category</label><input id="adminProductCategory" placeholder="Example: Personal Care"></div>
+   <div><label>Size / unit</label><input id="adminProductUnit" placeholder="Example: 375 g"></div>
+   <div class="full"><label>Product icon</label><input id="adminProductIcon" maxlength="4" placeholder="Example: 🧴"><div id="iconPicker" class="icon-picker"></div></div>
+  </div>
+  <div class="admin-actions"><button onclick="saveAdminProduct()">Save product</button><button class="secondary" onclick="resetProductForm()">Clear form</button></div>
+ </div>
+ <div class="card"><div class="admin-section-title"><h2>Product table</h2><input id="productAdminSearch" style="max-width:260px" placeholder="Search products..."></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Product</th><th>Brand</th><th>Category</th><th>Unit</th><th>Prices</th><th>Actions</th></tr></thead><tbody id="productAdminRows"></tbody></table></div></div>
+</section>
+
+<section id="panel-prices" class="admin-panel">
+ <div class="card">
+  <div class="admin-section-title"><div><h2>Manual Store Price</h2><div class="muted">Enter the price you find on a grocery store website. It updates comparisons immediately.</div></div><span class="admin-count" id="priceTableCount">0 prices</span></div>
+  <div class="admin-form-grid">
+   <div><label>Product</label><select id="adminPriceProduct"></select></div>
+   <div><label>Store</label><select id="adminPriceStore"></select></div>
+   <div><label>Price</label><input id="adminPriceAmount" type="number" min="0.01" step="0.01" placeholder="4.99"></div>
+   <div><label>Date checked</label><input id="adminPriceDate" type="date"></div>
+   <div class="full"><label>Source URL or note</label><input id="adminPriceSource" placeholder="Walmart website / manually checked"></div>
+  </div>
+  <div class="admin-actions"><button onclick="saveAdminPrice()">Save price</button><button class="secondary" onclick="resetPriceForm()">Clear form</button></div>
+ </div>
+ <div class="card"><div class="admin-section-title"><h2>Pricing table</h2><input id="priceAdminSearch" style="max-width:260px" placeholder="Search product or store..."></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Product</th><th>Store</th><th>Price</th><th>Source</th><th>Updated</th><th>Actions</th></tr></thead><tbody id="priceAdminRows"></tbody></table></div></div>
+</section>
+
+<section id="panel-aliases" class="admin-panel">
+ <div class="card">
+  <div class="admin-section-title"><div><h2>Receipt Aliases</h2><div class="muted">Teach the scanner that MLK, GV MLK and MILK 2L all mean the same readable product.</div></div><span class="admin-count" id="aliasTableCount">0 groups</span></div>
+  <label>Product</label><select id="adminAliasProduct"></select>
+  <label>Aliases — separate with commas or new lines</label><textarea id="adminAliasText" rows="5" placeholder="mlk, gv mlk, milk 2l"></textarea>
+  <div class="admin-actions"><button onclick="saveAdminAliases()">Save aliases</button><button class="secondary" onclick="resetAliasForm()">Clear form</button></div>
+ </div>
+ <div class="card"><div class="admin-section-title"><h2>Alias table</h2><input id="aliasAdminSearch" style="max-width:260px" placeholder="Search aliases..."></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Product</th><th>Readable name</th><th>Aliases used on receipts</th><th>Actions</th></tr></thead><tbody id="aliasAdminRows"></tbody></table></div></div>
+</section>
+
+
+<section id="panel-alias-review" class="admin-panel">
+ <div class="card">
+  <div class="admin-section-title">
+   <div>
+    <h2>Alias review queue</h2>
+    <div class="muted">Review unmatched receipt text, confirm the store and connect it to the correct product. Approved matches become reusable aliases automatically.</div>
+   </div>
+   <button class="secondary" style="width:auto" onclick="refreshAliasCandidates()">Refresh</button>
+  </div>
+  <div class="notice" style="margin-top:12px">Crowd verification requires the same product, store and exact price from <strong>3 different users and 3 different receipts</strong>. Prices go live automatically when both thresholds are met.</div>
+  <div class="admin-table-wrap" style="margin-top:14px">
+   <table class="admin-table">
+    <thead><tr><th>Receipt name</th><th>Store</th><th>Seen</th><th>Verification</th><th>Match to product</th><th>Action</th></tr></thead>
+    <tbody id="aliasCandidateRows"><tr><td colspan="6">Open this tab to load unmatched names.</td></tr></tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+<section id="panel-receipts" class="admin-panel">
+ <div class="admin-section-hero">
+  <div><span class="eyebrow">RECEIPT OPERATIONS</span><h2>Receipts & extracted products</h2><p>Every customer upload appears here after it is saved. Correct the store when OCR cannot identify it.</p></div>
+  <div class="admin-hero-actions"><button class="secondary compact-button" onclick="refreshAdminReceiptData()">Refresh cloud data</button><button class="danger compact-button" onclick="openResetReceiptModal()">Reset receipt data</button></div>
+ </div>
+ <div class="grid2 admin-stats-grid">
+  <div class="stat"><div class="muted">Receipts</div><div id="adminReceiptCount" class="value">0</div></div>
+  <div class="stat"><div class="muted">Extracted items</div><div id="matchedItemCount" class="value">0</div></div>
+  <div class="stat"><div class="muted">Price reports</div><div id="priceReportCount" class="value">0</div></div>
+  <div class="stat"><div class="muted">Verified prices</div><div id="promotedCount" class="value">0</div></div>
+ </div>
+ <div class="card admin-receipt-card">
+  <div class="admin-section-title"><div><h2>Uploaded receipts</h2><div class="muted">Store, total, user and upload status.</div></div><input id="receiptAdminSearch" placeholder="Search store, user or receipt…" oninput="renderReceiptAdmin()"></div>
+  <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Date</th><th>User</th><th>Store (editable)</th><th>Total</th><th>Items</th><th>Status</th></tr></thead><tbody id="adminReceiptRows"><tr><td colspan="6">Open this tab to load receipts.</td></tr></tbody></table></div>
+ </div>
+ <div class="card"><div class="admin-section-title"><div><h2>Digitized receipt items</h2><div class="muted">Raw OCR name, matched product, price and store.</div></div></div><div id="adminItemList" class="admin-item-grid"></div></div>
+ <div class="card"><h2>Crowd price consensus</h2><div id="consensusList"></div></div>
+</section>
+
+<section id="panel-users" class="admin-panel">
+<div class="card">
+  <div class="row space">
+    <div>
+      <h2>Users</h2>
+      <div class="muted">
+        Review accounts, receipts and contribution activity.
+      </div>
+    </div>
+
+    <button
+      class="secondary"
+      style="width:auto"
+      onclick="addDemoUser()"
+    >
+      Add test account
+    </button>
+  </div>
+
+  <div style="overflow-x:auto;margin-top:14px">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Receipts</th>
+          <th>Price reports</th>
+          <th>Created</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="usersTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+
+</section>
+</div></div>
+
+</div>
+</main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/data.js"></script>
+<script src="js/app-config.js"></script>
+<script src="js/launch-features.js"></script>
+<script src="js/cloud-sync.js"></script><script src="js/database-service.js"></script><script src="js/admin-data.js"></script><script src="js/admin.js"></script><script src="js/admin-launch.js"></script>
+
+
+<div id="resetReceiptModal" class="shopping-modal" aria-hidden="true">
+  <div class="shopping-modal-card reset-receipt-card">
+    <div class="destructive-icon" aria-hidden="true">!</div>
+    <h2>Reset all receipt data?</h2>
+    <p class="muted">This permanently deletes uploaded receipts, extracted receipt items and crowd price reports. Products, prices, stores, aliases and user accounts stay unchanged.</p>
+    <label class="reset-confirm-label" for="resetReceiptConfirm">Type <strong>RESET</strong> to continue</label>
+    <input id="resetReceiptConfirm" autocomplete="off" placeholder="RESET" oninput="updateResetReceiptButton()">
+    <div class="shopping-modal-buttons">
+      <button class="secondary" onclick="closeResetReceiptModal()">Cancel</button>
+      <button id="confirmResetReceiptButton" class="danger" disabled onclick="confirmResetReceiptData()">Delete receipt data</button>
+    </div>
+  </div>
+</div>
+<div id="deleteUserModal" class="shopping-modal">
+  <div class="shopping-modal-card">
+    <h2>Delete this user's data?</h2>
+
+    <p id="deleteUserMessage" class="muted">
+      This removes receipts, price reports, budget and shopping progress for the selected user.
+    </p>
+
+    <div class="shopping-modal-buttons">
+      <button class="secondary" onclick="closeDeleteUserModal()">
+        No, keep data
+      </button>
+
+      <button class="danger" onclick="confirmDeleteUserData()">
+        Yes, delete data
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const button=document.getElementById('adminMenuButton');
+  const backdrop=document.getElementById('adminDrawerBackdrop');
+  const close=()=>{document.body.classList.remove('admin-nav-open'); if(button) button.setAttribute('aria-expanded','false');};
+  if(button){button.addEventListener('click',()=>{const open=document.body.classList.toggle('admin-nav-open');button.setAttribute('aria-expanded',String(open));});}
+  if(backdrop) backdrop.addEventListener('click',close);
+  document.querySelectorAll('.admin-tab').forEach(tab=>tab.addEventListener('click',()=>{if(window.innerWidth<=900) close();}));
+  window.addEventListener('resize',()=>{if(window.innerWidth>900) close();});
+})();
+</script>
+<script>if('serviceWorker' in navigator && !['localhost','127.0.0.1'].includes(location.hostname)){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}</script></body></html>

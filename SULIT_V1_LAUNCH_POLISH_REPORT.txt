@@ -1,0 +1,23 @@
+SULIT V1 LAUNCH POLISH
+
+Changed scope only:
+- Added anonymous Get Started account creation with name-only onboarding.
+- Added email account upgrade that preserves the current anonymous Supabase user.
+- Added passwordless sign-in for users with an existing saved account.
+- Added post-receipt Save my account prompt.
+- Added profile account status/action.
+- Added restrained background and category-card layering.
+- Preserved the existing Home categories, Store Details, Shopping Plan, route preview, receipts, OCR and Admin logic.
+
+Supabase settings required:
+- Enable Anonymous Sign-Ins.
+- Enable Manual Linking for anonymous-to-email conversion.
+- Configure Site URL and redirect URLs for localhost and your production domain.
+- Configure email templates for Change Email / Magic Link or OTP.
+
+Live testing required:
+- Anonymous session creation.
+- Email verification link on the same anonymous account.
+- Existing-account magic-link sign-in on another device.
+- Cross-device profile, receipts and savings sync.
+- GPS and road route preview.
